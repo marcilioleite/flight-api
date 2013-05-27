@@ -16,10 +16,11 @@ Flight::route('/plays/reset/@user',
 	}
 );
 
-Flight::route('POST /plays',
+Flight::route('POST /plays/?$',
 	function(){
-		$user = $_POST['user'];
-		$play = $_POST['play'];
+		$data = Flight::request()->data;
+		$user = $data['user'];
+		$play = $data['play'];
 		session_start();
 		if (!isset($_SESSION[$user]))
 			$_SESSION[$user] = array('readtime' => 0, 'plays' => array());
